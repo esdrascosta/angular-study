@@ -11,17 +11,16 @@
 
       <span> Tasks </span>
 
-        <input type='text' ng-model='todoText' ng-keyup="$event.keyCode == 13 && addTodo()" />
-        <button type="button" name="button" ng-submit='addTodo()'> Add </button>
-        <button type="button" name="button" ng-submit='archive()'>Archive</button>
+      <input type='text' ng-model='todoText' ng-keyup="$event.keyCode == 13 && addTodo()" />
+      <button type="button" name="button" ng-click='addTodo()'> Add </button>
+      <button type="button" name="button" ng-click='archive()'>Archive</button>
 
       <ul>
         <li ng-repeat='task in todo'>
-              <input type='checkbox'  ng-model='task.done' />
-              {{task.description}}
+          <input type='checkbox'  ng-model='task.done' /> {{task.description}}
         </li>
       </ul>
 
-      </div>
+    </div>
   </body>
 </html>
