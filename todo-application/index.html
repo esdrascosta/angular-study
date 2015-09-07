@@ -11,9 +11,11 @@
 
       <span> Tasks </span>
 
-      <input type='text' ng-model='todoText' ng-keyup="$event.keyCode == 13 && addTodo()" />
-      <button type="button" name="button" ng-click='addTodo()'> Add </button>
-      <button type="button" name="button" ng-click='archive()'>Archive</button>
+      <form name="todoForm" >
+        <input type='text' ng-model='todoText' ng-keyup="$event.keyCode == 13 && addTodo()" ng-required='true' />
+        <button type="button" name="button" ng-click='addTodo()' ng-disabled='todoForm.$invalid'> Add </button>
+        <button type="button" name="button" ng-click='archive()'>Archive</button>
+      </form>
 
       <ul>
         <li ng-repeat='task in todo'>
