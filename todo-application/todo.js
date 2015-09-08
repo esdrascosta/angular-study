@@ -1,4 +1,4 @@
-angular.module('TodoApp',[]).controller('TodoController',['$scope', function ($scope) {
+angular.module('TodoApp',['ngMaterial']).controller('TodoController',['$scope', function ($scope) {
   $scope.todo=[
     { 'description':'do Something 1', 'done': false },
     { 'description':'do Something 2', 'done': false },
@@ -11,14 +11,15 @@ angular.module('TodoApp',[]).controller('TodoController',['$scope', function ($s
   $scope.addTodo = function(){
     $scope.todo.push({ 'description':$scope.todoText, 'done': false });
     $scope.todoText='';
+    $scope.todoForm.$setUntouched();
   }
 
   $scope.archive = function(){
-    for (var i = 0; i < $scope.todo.length; i++) {
-      if($scope.todo[i].done)
-        $scope.todo.splice(i,1);
-    }
+    var oldTodos = $scope.todo;
+    $scope.todo = [];
+    angular.forEach(oldTodos, function(task) {
+      if (!task.done) $scope.todo.push(task);
+    });
+    $scope.todoForm.$setUntouched();
   }
-
-
-}])
+}]);

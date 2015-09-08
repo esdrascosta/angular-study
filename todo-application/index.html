@@ -3,26 +3,69 @@
   <head>
     <meta charset="utf-8">
     <title> TODO App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" >
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js" charset="utf-8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.min.js" charset="utf-8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-aria.min.js" charset="utf-8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.js" charset="utf-8"></script>
+
     <script src="todo.js" charset="utf-8"></script>
+
+    <style media="screen">
+      .done {
+          text-decoration: line-through;
+          color: grey;
+      }
+    </style>
+
   </head>
   <body ng-app="TodoApp">
-    <div ng-controller='TodoController'>
+      <div ng-controller='TodoController' layout="column">
+           <md-toolbar>
+             <div class="md-toolbar-tools">
+               <h1>Todo App</h2>
+              <span flex></span>
 
-      <span> Tasks </span>
+              <md-fab-speed-dial md-direction="left">
+                 <md-fab-trigger>
+                     <md-button aria-label="menu" class="md-fab">
+                         <md-tooltip md-direction="bottom">Menu</md-tooltip>
+                         <md-icon class="material-icons step">menu</md-icon>
+                     </md-button>
+                 </md-fab-trigger>
+                 <md-fab-actions>
+                   <md-button class="md-fab md-mini" ng-click='archive()'>
+                      <md-tooltip md-direction="bottom">Delete</md-tooltip>
+                     <md-icon class="material-icons step">delete</md-icon>
+                   </md-button>
+                 </md-fab-actions>
+               </md-fab-speed-dial>
+             </div>
+          </md-toolbar>
 
-      <form name="todoForm" >
-        <input type='text' ng-model='todoText' ng-keyup="$event.keyCode == 13 && addTodo()" ng-required='true' />
-        <button type="button" name="button" ng-click='addTodo()' ng-disabled='todoForm.$invalid'> Add </button>
-        <button type="button" name="button" ng-click='archive()'>Archive</button>
-      </form>
+        <md-content layout-padding style="height: 600px;padding: 24px;">
+          <form name="todoForm">
+            <md-input-container flex>
+              <label>Task</label>
+              <input ng-model="todoText"
+                     ng-keyup="todoForm.nameTask.$valid && $event.keyCode == 13 && addTodo()"
+                     ng-required='true'
+                     name='nameTask' >
+            </md-input-container>
+          </form>
 
-      <ul>
-        <li ng-repeat='task in todo'>
-          <input type='checkbox'  ng-model='task.done' /> {{task.description}}
-        </li>
-      </ul>
-
+          <md-list>
+            <md-list-item ng-repeat='task in todo' >
+              <md-checkbox ng-model='task.done'> </md-checkbox>
+              <p ng-class='{ done : task.done }'> {{task.description}} </p>
+            </md-list-item>
+          </md-list>
+      </md-content>
     </div>
   </body>
 </html>
