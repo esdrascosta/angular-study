@@ -22,33 +22,19 @@
           color: grey;
       }
     </style>
-
   </head>
   <body ng-app="TodoApp">
-      <div ng-controller='TodoController' layout="column">
-           <md-toolbar>
-             <div class="md-toolbar-tools">
-               <h1>Todo App</h2>
-              <span flex></span>
-
-              <md-fab-speed-dial md-direction="left">
-                 <md-fab-trigger>
-                     <md-button aria-label="menu" class="md-fab">
-                         <md-tooltip md-direction="bottom">Menu</md-tooltip>
-                         <md-icon class="material-icons step">menu</md-icon>
-                     </md-button>
-                 </md-fab-trigger>
-                 <md-fab-actions>
-                   <md-button class="md-fab md-mini" ng-click='archive()'>
-                      <md-tooltip md-direction="bottom">Delete</md-tooltip>
-                     <md-icon class="material-icons step">delete</md-icon>
-                   </md-button>
-                 </md-fab-actions>
-               </md-fab-speed-dial>
+      <div ng-controller='TodoController'>
+           <md-toolbar >
+             <div class='md-toolbar-tools'>
+              <span flex>  <h1>Todo App</h2></span>
+              <md-button class="md-fab md-fab-top-right" style="position: relative; top: 50%;" ng-click='archive()'>
+                <md-tooltip md-direction="left">Delete</md-tooltip>
+                <md-icon class="material-icons step">delete</md-icon>
+              </md-button>
              </div>
           </md-toolbar>
-
-        <md-content layout-padding style="height: 600px;padding: 24px;">
+        <md-content layout-padding>
           <form name="todoForm">
             <md-input-container flex>
               <label>Task</label>
@@ -61,8 +47,11 @@
 
           <md-list>
             <md-list-item ng-repeat='task in todo' >
-              <md-checkbox ng-model='task.done'> </md-checkbox>
-              <p ng-class='{ done : task.done }'> {{task.description}} </p>
+                <div class="md-list-item-text" layout='colunm'>
+                  <md-checkbox ng-model='task.done'> </md-checkbox>
+                  <p ng-class='{ done : task.done }'> {{task.description}} </p>
+                </div>
+
             </md-list-item>
           </md-list>
       </md-content>
